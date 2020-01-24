@@ -8,14 +8,14 @@ const forecast = (lat, long, cb) => {
         url,
         json: true
     }, (error, { body }) => {
-        // console.dir(data, {depth: null})
+        // console.dir(body, {depth: null})
         if (error) {
             cb('Unable to connect to weather service', undefined)
         } else if (body.error) {
             cb('Unable to find location. Try another search',undefined)
         } else {
-            const data = `${body.daily.data[0].summary} It is currently ${body.currently.temperature} degrees out. There is a ${body.currently.precipProbability}% chance of rain.`;
-
+            const data = `${body.daily.data[0].summary} It is currently ${body.currently.temperature} degrees out. There is a ${body.currently.precipProbability}% chance of rain. The high today id ${body.daily.data[0].temperatureHigh} and the low is ${body.daily.data[0].temperatureLow}`;
+            // console.log(body)
             cb(undefined,  data)
         }
     })
